@@ -13,9 +13,9 @@
 
 
 /**
- * Table tl_myparcelcom_api_auth
+ * Table tl_myparcelcom_api_shipment
  */
-$strName = 'tl_myparcelcom_api_auth';
+$strName = 'tl_myparcelcom_api_shipment';
 
 $GLOBALS['TL_DCA'][$strName] = array
 (
@@ -94,7 +94,7 @@ $GLOBALS['TL_DCA'][$strName] = array
     //Palettes
     'palettes' => array
     (
-        'default'   =>  '{data_legend},name,clientid,clientsecret,url;',
+        'default'   =>  '{data_legend},shipmentID,status;',
     ),
     
     
@@ -105,44 +105,26 @@ $GLOBALS['TL_DCA'][$strName] = array
         (
             'sql' => "int(10) unsigned NOT NULL auto_increment"
         ),
-    
+        
         'tstamp' => array
         (
             'sql' => "int(10) unsigned NOT NULL default '0'"
         ),
         
-        'name' => array
-        (
-            'label'             => $GLOBALS['TL_LANG'][$strName]['name'],
-            'flag'              => 1,
-            'sorting'           => true,
-            'default'           => '',
-            'search'            => true,
+        'shipmentID' => [
+            'label'             => $GLOBALS['TL_LANG'][$strName]['shipmentID'],
             'inputType'         => 'text',
-            'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
+            'eval'              => array('mandatory' => true, 'tl_class' => 'long', 'unique' => true),
             'sql'               => "varchar(255) NOT NULL default ''"
-        ),
+        ],
         
-        'clientid' => [
-            'label'             => $GLOBALS['TL_LANG'][$strName]['clientid'],
+        'status' => [
+            'label'             => $GLOBALS['TL_LANG'][$strName]['status'],
             'inputType'         => 'text',
             'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
             'sql'               => "varchar(255) NOT NULL default ''"
         ],
-    
-        'clientsecret' => [
-            'label'             => $GLOBALS['TL_LANG'][$strName]['clientsecret'],
-            'inputType'         => 'text',
-            'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
-            'sql'               => "varchar(255) NOT NULL default ''"
-        ],
-    
-        'url' => [
-            'label'             => $GLOBALS['TL_LANG'][$strName]['url'],
-            'inputType'         => 'text',
-            'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
-            'sql'               => "varchar(255) NOT NULL default ''"
-        ],
+        
     )
 );
 
