@@ -33,7 +33,6 @@ $GLOBALS['TL_DCA'][$strName] = array
         )
     ),
     
-    
     //List
     'list' => array
     (
@@ -87,7 +86,7 @@ $GLOBALS['TL_DCA'][$strName] = array
                 'label'         => $GLOBALS['TL_LANG'][$strName]['show'],
                 'href'          => 'act=show',
                 'icon'          => 'show.svg',
-            ),
+            )
         )
     ),
     
