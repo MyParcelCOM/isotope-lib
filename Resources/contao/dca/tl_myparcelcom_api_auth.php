@@ -47,7 +47,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         
         'label' => array
         (
-            'fields'            => array('name', 'type'),
+            'fields'            => array('name'),
             'showColumns'       => true,
         ),
         
@@ -94,7 +94,7 @@ $GLOBALS['TL_DCA'][$strName] = array
     //Palettes
     'palettes' => array
     (
-        'default'   =>  '{data_legend},name,clientid,clientsecret,url;',
+        'default'   =>  '{data_legend},name,clientid,clientsecret,apiUrl,authUrl;',
     ),
     
     
@@ -137,8 +137,15 @@ $GLOBALS['TL_DCA'][$strName] = array
             'sql'               => "varchar(255) NOT NULL default ''"
         ],
     
-        'url' => [
-            'label'             => $GLOBALS['TL_LANG'][$strName]['url'],
+        'apiUrl' => [
+            'label'             => $GLOBALS['TL_LANG'][$strName]['apiUrl'],
+            'inputType'         => 'text',
+            'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
+            'sql'               => "varchar(255) NOT NULL default ''"
+        ],
+    
+        'authUrl' => [
+            'label'             => $GLOBALS['TL_LANG'][$strName]['authUrl'],
             'inputType'         => 'text',
             'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
             'sql'               => "varchar(255) NOT NULL default ''"

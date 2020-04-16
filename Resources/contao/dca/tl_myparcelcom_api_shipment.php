@@ -24,6 +24,7 @@ $GLOBALS['TL_DCA'][$strName] = array
     (
         'dataContainer'     => 'Table',
         'enableVersioning'  => true,
+        'notCreatable'      => true,
         'sql'               => array
         (
             'keys' => array
@@ -40,25 +41,15 @@ $GLOBALS['TL_DCA'][$strName] = array
         'sorting' => array
         (
             'mode'              => 2,
-            'fields'            => array('name ASC'),
+            'fields'            => array('shipmentID ASC'),
             'panelLayout'       => 'filter;sort,search,limit',
-            'headerFields'      => array('name', 'type'),
+            'headerFields'      => array('shipmentID'),
         ),
         
         'label' => array
         (
-            'fields'            => array('name', 'type'),
+            'fields'            => array('shipmentID'),
             'showColumns'       => true,
-        ),
-        
-        'global_operations' => array
-        (
-            'all' => [
-                'label'         => $GLOBALS['TL_LANG']['MSC']['all'],
-                'href'          => 'act=select',
-                'class'         => 'header_edit_all',
-                'attributes'    => 'onclick="Backend.getScrollOffSet()" accesskey="e"'
-            ]
         ),
         
         'operations' => array
@@ -103,12 +94,12 @@ $GLOBALS['TL_DCA'][$strName] = array
     (
         'id' => array
         (
-            'sql' => "int(10) unsigned NOT NULL auto_increment"
+            'sql' => "int(11) unsigned NOT NULL auto_increment"
         ),
         
         'tstamp' => array
         (
-            'sql' => "int(10) unsigned NOT NULL default '0'"
+            'sql' => "int(11) unsigned NOT NULL default '0'"
         ),
         
         'shipmentID' => [
@@ -123,6 +114,13 @@ $GLOBALS['TL_DCA'][$strName] = array
             'inputType'         => 'text',
             'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
             'sql'               => "varchar(255) NOT NULL default ''"
+        ],
+        
+        'weight' => [
+            'label'             => $GLOBALS['TL_LANG'][$strName]['weight'],
+            'inputType'         => 'text',
+            'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
+            'sql'               => "int(11) NOT NULL default 0"
         ],
         
     )
