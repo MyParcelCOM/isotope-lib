@@ -7,6 +7,7 @@ $GLOBALS['TL_LANG'][$strName]['clientid'] = ['Client-ID', 'Geben Sie hier ihre c
 $GLOBALS['TL_LANG'][$strName]['clientsecret'] = ['Client-Secret', 'Geben Sie hier ihr client-secret für die Authentifizierung ein.'];
 $GLOBALS['TL_LANG'][$strName]['apiUrl'] = ['API-URL', 'Geben Sie die URL an, unter der die MyParcel.com-API erreichbar ist.'];
 $GLOBALS['TL_LANG'][$strName]['authUrl'] = ['Authentifizierungs-URL', 'Geben Sie die URL an, unter der der MyParcel.com-Authentifizierungsserver erreichbar ist.'];
+$GLOBALS['TL_LANG'][$strName]['shopName'] = ['Name des Shops', 'Geben Sie den Namen des MyParcel.com-Shops ein, der verknüpft werden soll.'];
 
 $GLOBALS['TL_LANG'][$strName]['data_legend'] = "Daten zur Authentifizierung";
 

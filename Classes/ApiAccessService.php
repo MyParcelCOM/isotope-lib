@@ -10,6 +10,7 @@ use MyParcelCom\ApiSdk\Resources\Address;
 use MyParcelCom\ApiSdk\Resources\Interfaces\AddressInterface;
 use MyParcelCom\ApiSdk\Resources\Interfaces\FileInterface;
 use MyParcelCom\ApiSdk\Resources\Shipment;
+use MyParcelCom\ApiSdk\Resources\Shop;
 
 class ApiAccessService
 {
@@ -23,7 +24,14 @@ class ApiAccessService
     // URL of the authentication server
     private $authUrl = "";
     
+    private $shopName = "";
+    
     private $authenticated = false;
+    
+    /**
+     * @var Shop
+     */
+    private $currentShop = null;
     
     /**
      * @var MyParcelComApi
@@ -36,13 +44,14 @@ class ApiAccessService
      * @param string $clientSecret
      * @param string $url
      */
-    public function __construct(string $clientID, string $clientSecret, string $url, $authUrl)
+    public function __construct(string $clientID, string $clientSecret, string $url, $authUrl, $shopName)
     {
         $this->clientID = $clientID;
         $this->clientSecret = $clientSecret;
         $this->url = $url;
         $this->authUrl = $authUrl;
         $this->api = new MyParcelComApi($url);
+        $this->shopName = $shopName;
     }
     
     /**
@@ -63,6 +72,21 @@ class ApiAccessService
         return $this->authenticated;
     }
     
+    private function getCurrentShop()
+    {
+        $this->authenticate();
+        if ($this->currentShop === null) {
+            $availableShops = $this->api->getShops();
+            foreach ($availableShops as $shop) {
+                if ($shop->getName() === $this->shopName) {
+                    $this->currentShop = $shop;
+                    break;
+                }
+            }
+        }
+        return $this->currentShop;
+    }
+    
     /**
      * Connects with the api and creates the shipment resource with the required fields.
      * @param $weight
@@ -76,8 +100,7 @@ class ApiAccessService
         $shipment = new Shipment();
         $shipment->getPhysicalProperties()->setWeight($weight);
         $shipment->setRecipientAddress($this->convertAddress($recipientAddress));
-        // TODO correct shop?
-        $shop = $this->api->getDefaultShop();
+        $shop = $this->getCurrentShop();
         if ($senderAddress !== []) {
             $shipment->setSenderAddress($this->convertAddress($senderAddress));
         } else {
