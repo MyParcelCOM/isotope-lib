@@ -23,6 +23,8 @@ class ApiAccessService
     // URL of the authentication server
     private $authUrl = "";
     
+    private $authenticated = false;
+    
     /**
      * @var MyParcelComApi
      */
@@ -43,14 +45,22 @@ class ApiAccessService
         $this->api = new MyParcelComApi($url);
     }
     
-    public function authenticate()
+    /**
+     * Checks if the authentication has already been done and does so, if not.
+     * @return bool
+     */
+    private function authenticate()
     {
-        $authenticator = new ClientCredentials(
-            $this->clientID,
-            $this->clientSecret,
-            $this->authUrl
-        );
-        $this->api->authenticate($authenticator);
+        if (!$this->authenticated) {
+            $authenticator = new ClientCredentials(
+                $this->clientID,
+                $this->clientSecret,
+                $this->authUrl
+            );
+            $this->api->authenticate($authenticator);
+            $this->authenticated = true;
+        }
+        return $this->authenticated;
     }
     
     /**
@@ -62,19 +72,26 @@ class ApiAccessService
      */
     public function createShipment($weight, array $recipientAddress, $senderAddress = [], $returnAddress = [])
     {
+        $this->authenticate();
         $shipment = new Shipment();
         $shipment->getPhysicalProperties()->setWeight($weight);
         $shipment->setRecipientAddress($this->convertAddress($recipientAddress));
+        // TODO correct shop?
+        $shop = $this->api->getDefaultShop();
         if ($senderAddress !== []) {
             $shipment->setSenderAddress($this->convertAddress($senderAddress));
+        } else {
+            $shipment->setSenderAddress($shop->getSenderAddress());
         }
         if ($returnAddress !== []) {
             $shipment->setReturnAddress($this->convertAddress($returnAddress));
+        } else {
+            $shipment->setReturnAddress($shop->getReturnAddress());
         }
         try {
             $createdShipment = $this->api->createShipment($shipment);
         } catch (InvalidResourceException $exception) {
-            // TODO fehermeldung geben
+            // TODO fehlermeldung geben
             return false;
         }
         // store shipment to database
@@ -102,13 +119,14 @@ class ApiAccessService
      */
     public function registerShipment($shipmentID)
     {
+        $this->authenticate();
         $registered_at = time();
         $shipment = $this->api->getShipment($shipmentID);
         $shipment->setRegisterAt($registered_at);
         try {
             $this->api->updateShipment($shipment);
         } catch (InvalidResourceException $exception) {
-            // TODO fehler returnen
+            // TODO fehlermeldung geben
             return false;
         }
         return true;
@@ -117,7 +135,8 @@ class ApiAccessService
     
     public function getShipment($shipmentId)
     {
-        return $this->api->updateShipment($shipmentId);
+        $this->authenticate();
+        return $this->api->getShipment($shipmentId);
     }
     
     /**
@@ -126,6 +145,7 @@ class ApiAccessService
      */
     public function getLabel($shipmentId)
     {
+        $this->authenticate();
         $shipment = $this->api->getShipment($shipmentId);
         $files = $shipment->getFiles();
         foreach ($files as $file) {
@@ -140,6 +160,7 @@ class ApiAccessService
     
     private function convertAddress(array $addressData) : AddressInterface
     {
+        // TODO street number ???
         $address = new Address();
         $address->setStreet1($addressData['street']);
         $address->setCity($addressData['city']);
