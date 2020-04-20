@@ -114,7 +114,7 @@ class ApiAccessService
         try {
             $createdShipment = $this->api->createShipment($shipment);
         } catch (InvalidResourceException $exception) {
-            // TODO fehlermeldung geben
+            // TODO fehlermeldung loggen
             return false;
         }
         // store shipment to database
@@ -149,7 +149,7 @@ class ApiAccessService
         try {
             $this->api->updateShipment($shipment);
         } catch (InvalidResourceException $exception) {
-            // TODO fehlermeldung geben
+            // TODO fehlermeldung loggen
             return false;
         }
         return true;

@@ -88,13 +88,11 @@ $GLOBALS['TL_DCA'][$strName] = array
                 'label'         => $GLOBALS['TL_LANG'][$strName]['registerShipment'],
                 'href'          => 'key=registerShipment',
                 'icon'          => 'show.svg',
-//                'button_callback' => [$cbClass, 'registerShipmentButtonCb']
             ],
             'downloadLabel' => [
                 'label'         => $GLOBALS['TL_LANG'][$strName]['downloadLabel'],
                 'href'          => 'key=downloadLabel',
                 'icon'          => 'show.svg',
-//                'button_callback' => [$cbClass, 'downloadLabelButtonCb']
             ]
         )
     ),
