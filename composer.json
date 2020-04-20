@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "MyParcelcom\\ContaoApi\\": ""
+            "MyParcelCom\\ContaoApi\\": ""
         },
         "classmap": [
             "Resources/contao/"
@@ -42,7 +42,7 @@
         "branch-alias": {
             "dev-master": "1.0.x-dev"
         },
-        "contao-manager-plugin": "MyParcelcom\\ContaoApi\\ContaoManager\\Plugin"
+        "contao-manager-plugin": "MyParcelCom\\ContaoApi\\ContaoManager\\Plugin"
     }
 }
 

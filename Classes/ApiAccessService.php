@@ -1,6 +1,6 @@
 <?php
 
-namespace MyParcelcom\ContaoApi\Classes;
+namespace MyParcelCom\ContaoApi\Classes;
 
 use Contao\Database;
 use MyParcelCom\ApiSdk\Authentication\ClientCredentials;

@@ -4,7 +4,7 @@
  * Backend Modules
  */
 
-use MyParcelcom\ContaoApi\Classes\Contao\ShipmentCallback;
+use MyParcelCom\ContaoApi\Classes\Contao\ShipmentCallback;
 
 array_insert($GLOBALS['BE_MOD'], array_search('content', array_keys($GLOBALS['BE_MOD'])) + 1, array
 (

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MyParcelcom\ContaoApi\Classes\Contao;
+namespace MyParcelCom\ContaoApi\Classes\Contao;
 
 
 class ShipmentCallback
@@ -9,11 +9,19 @@ class ShipmentCallback
     public function registerShipmentButtonCb($row, $href, $label, $title, $icon)
     {
         // TODO do some sort of validation, so only valid shipments can be registered
+        $link = '<a href=' .$href . ' title=' . $title . '>';
+        if ($icon) {
+            $altText = "";
+            $icon = '<img src="' . $icon . '" width=16 height=16 alt=' .$altText . '/>';
+            $link .= $icon;
+        }
+        $link = $link . '</a>';
+        return $link;
     }
     
     public function registerShipment()
     {
-        
+    
     }
     
     public function downloadLabelButtonCb($row, $href, $label, $title, $icon)

@@ -1,12 +1,12 @@
 <?php
 
 
-namespace MyParcelcom\ContaoApi;
+namespace MyParcelCom\ContaoApi;
 
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class MyParcelcomContaoApiBundle extends Bundle
+class MyParcelComContaoApiBundle extends Bundle
 {
     
 }
