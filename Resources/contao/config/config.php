@@ -14,5 +14,10 @@ array_insert($GLOBALS['BE_MOD'], array_search('content', array_keys($GLOBALS['BE
     ]
 ));
 
+/**
+ * The available shop systems. Options should be added by the shop-system-specific bundles.
+ */
+$GLOBALS['myparcelcom']['availableShops'] = [];
+
 $GLOBALS['BE_MOD']['myparcelcom']['myparcelcom_api_shipment']['registerShipment'] = [ShipmentCallback::class, 'registerShipment'];
 $GLOBALS['BE_MOD']['myparcelcom']['myparcelcom_api_shipment']['downloadLabel'] = [ShipmentCallback::class, 'downloadLabel'];

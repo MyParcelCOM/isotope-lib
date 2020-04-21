@@ -93,7 +93,7 @@ $GLOBALS['TL_DCA'][$strName] = array
     //Palettes
     'palettes' => array
     (
-        'default'   =>  '{data_legend},name,clientid,clientsecret,apiUrl,authUrl,shopName;',
+        'default'   =>  '{data_legend},name,clientid,clientsecret,apiUrl,authUrl,shopName,connectWith;',
     ),
     
     
@@ -156,6 +156,16 @@ $GLOBALS['TL_DCA'][$strName] = array
             'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
             'sql'               => "varchar(255) NOT NULL default ''"
         ],
+    
+        'connectWith' => array
+        (
+            'label'             => $GLOBALS['TL_LANG'][$strName]['connectWith'],
+            'inputType'         => 'select',
+            'options'           => $GLOBALS['myparcelcom']['availableShops'],
+            'eval'              => array('mandatory' => false, 'tl_class' => 'long', 'includeBlankOption' => true),
+            'exclude'           => true,
+            'sql'               => "varchar(50) NOT NULL default ''"
+        ),
     )
 );
 
