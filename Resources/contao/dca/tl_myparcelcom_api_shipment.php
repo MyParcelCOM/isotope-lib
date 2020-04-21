@@ -137,7 +137,12 @@ $GLOBALS['TL_DCA'][$strName] = array
             'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
             'sql'               => "int(11) NOT NULL default 0"
         ],
-        
+    
+        'authID' => [
+            'label'             => $GLOBALS['TL_LANG'][$strName]['authID'],
+            'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
+            'sql'               => "int(11) NOT NULL default 0"
+        ],
     )
 );
 

@@ -17,10 +17,12 @@ class ShipmentCallback
     public function registerShipment(DC_Table $dc)
     {
         $shipmentDBId = $dc->id;
-        // TODO get correct ID
-        $authId = 1;
-        $authModel = MyParcelComAuthModel::findByPk($authId);
         $shipment = MyParcelComShipmentModel::findByPk($shipmentDBId);
+        $authModel = MyParcelComAuthModel::findByPk($shipment->authID);
+        if (!$authModel) {
+            Message::addError("Es ist ein Fehler bei der Registrierung der Lieferung mit der ID " . $shipmentDBId . " aufgetreten.");
+            return;
+        }
         $apiService = new ApiAccessService(
             $authModel->clientid,
             $authModel->clientsecret,
@@ -37,10 +39,12 @@ class ShipmentCallback
     public function downloadLabel(DC_Table $dc)
     {
         $shipmentDBId = $dc->id;
-        // TODO get correct ID
-        $authId = 1;
-        $authModel = MyParcelComAuthModel::findByPk($authId);
         $shipment = MyParcelComShipmentModel::findByPk($shipmentDBId);
+        $authModel = MyParcelComAuthModel::findByPk($shipment->authID);
+        if (!$authModel) {
+            Message::addError("Es ist ein Fehler beim Download des Lables der Lieferung mit der ID " . $shipmentDBId . " aufgetreten.");
+            return;
+        }
         $apiService = new ApiAccessService(
             $authModel->clientid,
             $authModel->clientsecret,
