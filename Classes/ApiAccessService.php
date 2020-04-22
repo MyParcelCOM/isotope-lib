@@ -3,14 +3,17 @@
 namespace MyParcelCom\ContaoApi\Classes;
 
 use Contao\Database;
+use Contao\System;
 use MyParcelCom\ApiSdk\Authentication\ClientCredentials;
 use MyParcelCom\ApiSdk\Exceptions\InvalidResourceException;
 use MyParcelCom\ApiSdk\MyParcelComApi;
 use MyParcelCom\ApiSdk\Resources\Address;
 use MyParcelCom\ApiSdk\Resources\Interfaces\AddressInterface;
 use MyParcelCom\ApiSdk\Resources\Interfaces\FileInterface;
+use MyParcelCom\ApiSdk\Resources\PhysicalProperties;
 use MyParcelCom\ApiSdk\Resources\Shipment;
 use MyParcelCom\ApiSdk\Resources\Shop;
+use Psr\Log\LoggerInterface;
 
 class ApiAccessService
 {
@@ -39,6 +42,11 @@ class ApiAccessService
     private $api = null;
     
     /**
+     * @var LoggerInterface
+     */
+    private $logger = null;
+    
+    /**
      * ApiAccessService constructor.
      * @param string $clientID
      * @param string $clientSecret
@@ -52,6 +60,7 @@ class ApiAccessService
         $this->authUrl = $authUrl;
         $this->api = new MyParcelComApi($url);
         $this->shopName = $shopName;
+        $this->logger = System::getContainer()->get('logger');
     }
     
     /**
@@ -90,15 +99,18 @@ class ApiAccessService
     /**
      * Connects with the api and creates the shipment resource with the required fields.
      * @param $weight
+     * @param $authID
      * @param $recipientAddress
      * @param $senderAddress
      * @param $returnAddress
      */
-    public function createShipment($weight, array $recipientAddress, $senderAddress = [], $returnAddress = [])
+    public function createShipment($weight, int $authID, array $recipientAddress, $senderAddress = [], $returnAddress = [])
     {
         $this->authenticate();
         $shipment = new Shipment();
-        $shipment->getPhysicalProperties()->setWeight($weight);
+        $physProps = new PhysicalProperties();
+        $physProps->setWeight($weight);
+        $shipment->setPhysicalProperties($physProps);
         $shipment->setRecipientAddress($this->convertAddress($recipientAddress));
         $shop = $this->getCurrentShop();
         if ($senderAddress !== []) {
@@ -114,7 +126,7 @@ class ApiAccessService
         try {
             $createdShipment = $this->api->createShipment($shipment);
         } catch (InvalidResourceException $exception) {
-            // TODO fehlermeldung loggen
+            $this->logger->error($exception->getMessage());
             return false;
         }
         // store shipment to database
@@ -124,7 +136,8 @@ class ApiAccessService
         $insertData = [
             'status' => $status,
             'shipmentID' => $shipmentID,
-            'weight' => $weight
+            'weight' => $weight,
+            'authID' => $authID
         ];
         $result = Database::getInstance()->prepare(
             "INSERT INTO tl_myparcelcom_api_shipment %s"
@@ -149,7 +162,7 @@ class ApiAccessService
         try {
             $this->api->updateShipment($shipment);
         } catch (InvalidResourceException $exception) {
-            // TODO fehlermeldung loggen
+            $this->logger->error($exception->getMessage());
             return false;
         }
         return true;
