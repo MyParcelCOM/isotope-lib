@@ -113,6 +113,14 @@ class ApiAccessService
         $shipment->setPhysicalProperties($physProps);
         $shipment->setRecipientAddress($this->convertAddress($recipientAddress));
         $shop = $this->getCurrentShop();
+        $shipment->setShop($shop);
+        $services = $this->api->getServices($shipment);
+        // TODO erst einmal erstbesten Service nutzen
+        if ($services) {
+            if ($currentService = $services->current()) {
+                $shipment->setService($currentService);
+            }
+        }
         if ($senderAddress !== []) {
             $shipment->setSenderAddress($this->convertAddress($senderAddress));
         } else {
