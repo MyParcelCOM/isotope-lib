@@ -9,6 +9,7 @@ $GLOBALS['TL_LANG'][$strName]['apiUrl'] = ['API-URL', 'Geben Sie die URL an, unt
 $GLOBALS['TL_LANG'][$strName]['authUrl'] = ['Authentifizierungs-URL', 'Geben Sie die URL an, unter der der MyParcel.com-Authentifizierungsserver erreichbar ist.'];
 $GLOBALS['TL_LANG'][$strName]['shopName'] = ['Name des Shops', 'Geben Sie den Namen des MyParcel.com-Shops ein, der verknüpft werden soll.'];
 $GLOBALS['TL_LANG'][$strName]['connectWith'] = ['Verknüpftes Shop-System', 'Wählen Sie ein Shop-System aus, welches Sie mit MyParcel.com verknüpfen wollen.'];
+$GLOBALS['TL_LANG'][$strName]['myparcelStatus'] = ['MyParcel-Bestellstatus', 'Wählen Sie den Bestellstatus aus, welcher nach der Übertragung der Daten ans MyParcel-Portal für die Bestellung angezeigt werden soll.'];
 
 $GLOBALS['TL_LANG'][$strName]['data_legend'] = "Daten zur Authentifizierung";
 

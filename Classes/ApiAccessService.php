@@ -109,18 +109,17 @@ class ApiAccessService
         $this->authenticate();
         $shipment = new Shipment();
         $physProps = new PhysicalProperties();
-        $physProps->setWeight($weight);
+        $physProps->setWeight($weight, PhysicalProperties::WEIGHT_GRAM);
         $shipment->setPhysicalProperties($physProps);
         $shipment->setRecipientAddress($this->convertAddress($recipientAddress));
         $shop = $this->getCurrentShop();
         $shipment->setShop($shop);
         $services = $this->api->getServices($shipment);
-        // TODO erst einmal erstbesten Service nutzen
-        if ($services) {
-            if ($currentService = $services->current()) {
-                $shipment->setService($currentService);
-            }
-        }
+//        if ($services) {
+//            if ($currentService = $services->current()) {
+//                $shipment->setService($currentService);
+//            }
+//        }
         if ($senderAddress !== []) {
             $shipment->setSenderAddress($this->convertAddress($senderAddress));
         } else {
@@ -208,7 +207,7 @@ class ApiAccessService
         $address = new Address();
         $address->setStreet1($addressData['street']);
         $address->setCity($addressData['city']);
-        $address->setCountryCode($addressData['country']);
+        $address->setCountryCode(strtoupper($addressData['country']));
         $address->setFirstName($addressData['firstname']);
         $address->setLastName($addressData['lastname']);
         return $address;

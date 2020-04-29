@@ -15,6 +15,9 @@
 /**
  * Table tl_myparcelcom_api_auth
  */
+
+use MyParcelCom\ContaoApi\Classes\Contao\AuthCallback;
+
 $strName = 'tl_myparcelcom_api_auth';
 
 $GLOBALS['TL_DCA'][$strName] = array
@@ -93,7 +96,7 @@ $GLOBALS['TL_DCA'][$strName] = array
     //Palettes
     'palettes' => array
     (
-        'default'   =>  '{data_legend},name,clientid,clientsecret,apiUrl,authUrl,shopName,connectWith;',
+        'default'   =>  '{data_legend},name,clientid,clientsecret,apiUrl,authUrl,shopName,connectWith,myparcelStatus;',
     ),
     
     
@@ -119,6 +122,7 @@ $GLOBALS['TL_DCA'][$strName] = array
             'search'            => true,
             'inputType'         => 'text',
             'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
+            'exclude'           => true,
             'sql'               => "varchar(255) NOT NULL default ''"
         ),
         
@@ -126,6 +130,7 @@ $GLOBALS['TL_DCA'][$strName] = array
             'label'             => $GLOBALS['TL_LANG'][$strName]['clientid'],
             'inputType'         => 'text',
             'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
+            'exclude'           => true,
             'sql'               => "varchar(255) NOT NULL default ''"
         ],
     
@@ -133,6 +138,7 @@ $GLOBALS['TL_DCA'][$strName] = array
             'label'             => $GLOBALS['TL_LANG'][$strName]['clientsecret'],
             'inputType'         => 'text',
             'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
+            'exclude'           => true,
             'sql'               => "varchar(255) NOT NULL default ''"
         ],
     
@@ -140,6 +146,7 @@ $GLOBALS['TL_DCA'][$strName] = array
             'label'             => $GLOBALS['TL_LANG'][$strName]['apiUrl'],
             'inputType'         => 'text',
             'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
+            'exclude'           => true,
             'sql'               => "varchar(255) NOT NULL default ''"
         ],
     
@@ -147,6 +154,7 @@ $GLOBALS['TL_DCA'][$strName] = array
             'label'             => $GLOBALS['TL_LANG'][$strName]['authUrl'],
             'inputType'         => 'text',
             'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
+            'exclude'           => true,
             'sql'               => "varchar(255) NOT NULL default ''"
         ],
     
@@ -154,6 +162,7 @@ $GLOBALS['TL_DCA'][$strName] = array
             'label'             => $GLOBALS['TL_LANG'][$strName]['shopName'],
             'inputType'         => 'text',
             'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
+            'exclude'           => true,
             'sql'               => "varchar(255) NOT NULL default ''"
         ],
     
@@ -165,6 +174,16 @@ $GLOBALS['TL_DCA'][$strName] = array
             'eval'              => array('mandatory' => false, 'tl_class' => 'long', 'includeBlankOption' => true),
             'exclude'           => true,
             'sql'               => "varchar(50) NOT NULL default ''"
+        ),
+    
+        'myparcelStatus' => array
+        (
+            'label'             => $GLOBALS['TL_LANG'][$strName]['myparcelStatus'],
+            'inputType'         => 'select',
+            'options_callback'  => [AuthCallback::class, 'getAvailableOrderStatus'],
+            'eval'              => array('mandatory' => false, 'tl_class' => 'long', 'includeBlankOption' => true),
+            'exclude'           => true,
+            'sql'               => "int(10) NOT NULL default 0"
         ),
     )
 );
