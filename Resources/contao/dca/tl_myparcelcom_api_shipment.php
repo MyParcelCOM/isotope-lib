@@ -16,11 +16,8 @@
  * Table tl_myparcelcom_api_shipment
  */
 
-use MyParcelCom\ContaoApi\Classes\Contao\ShipmentCallback;
 
 $strName = 'tl_myparcelcom_api_shipment';
-
-$cbClass = ShipmentCallback::class;
 
 $GLOBALS['TL_DCA'][$strName] = array
 (
@@ -84,16 +81,6 @@ $GLOBALS['TL_DCA'][$strName] = array
                 'href'          => 'act=show',
                 'icon'          => 'show.svg',
             ),
-            'registerShipment' => [
-                'label'         => $GLOBALS['TL_LANG'][$strName]['registerShipment'],
-                'href'          => 'key=registerShipment',
-                'icon'          => 'show.svg',
-            ],
-            'downloadLabel' => [
-                'label'         => $GLOBALS['TL_LANG'][$strName]['downloadLabel'],
-                'href'          => 'key=downloadLabel',
-                'icon'          => 'show.svg',
-            ]
         )
     ),
     

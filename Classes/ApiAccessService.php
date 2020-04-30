@@ -114,22 +114,6 @@ class ApiAccessService
         $shipment->setRecipientAddress($this->convertAddress($recipientAddress));
         $shop = $this->getCurrentShop();
         $shipment->setShop($shop);
-        $services = $this->api->getServices($shipment);
-//        if ($services) {
-//            if ($currentService = $services->current()) {
-//                $shipment->setService($currentService);
-//            }
-//        }
-        if ($senderAddress !== []) {
-            $shipment->setSenderAddress($this->convertAddress($senderAddress));
-        } else {
-            $shipment->setSenderAddress($shop->getSenderAddress());
-        }
-        if ($returnAddress !== []) {
-            $shipment->setReturnAddress($this->convertAddress($returnAddress));
-        } else {
-            $shipment->setReturnAddress($shop->getReturnAddress());
-        }
         try {
             $createdShipment = $this->api->createShipment($shipment);
         } catch (InvalidResourceException $exception) {
@@ -203,13 +187,14 @@ class ApiAccessService
     
     private function convertAddress(array $addressData) : AddressInterface
     {
-        // TODO street number ???
         $address = new Address();
         $address->setStreet1($addressData['street']);
         $address->setCity($addressData['city']);
         $address->setCountryCode(strtoupper($addressData['country']));
         $address->setFirstName($addressData['firstname']);
         $address->setLastName($addressData['lastname']);
+        $address->setStreetNumber($addressData['streetnumber']);
+        $address->setPostalCode($addressData['postalCode']);
         return $address;
     }
 }
