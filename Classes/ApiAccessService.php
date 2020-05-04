@@ -101,11 +101,14 @@ class ApiAccessService
      * @param $weight
      * @param $authID
      * @param $recipientAddress
-     * @param $senderAddress
-     * @param $returnAddress
+     * @param $additionalData
      */
-    public function createShipment($weight, int $authID, array $recipientAddress, $senderAddress = [], $returnAddress = [])
-    {
+    public function createShipment(
+        $weight,
+        int $authID,
+        array $recipientAddress,
+        $additionalData = []
+    ) {
         $this->authenticate();
         $shipment = new Shipment();
         $physProps = new PhysicalProperties();
@@ -114,6 +117,12 @@ class ApiAccessService
         $shipment->setRecipientAddress($this->convertAddress($recipientAddress));
         $shop = $this->getCurrentShop();
         $shipment->setShop($shop);
+        // set optional, additional data
+        // value amount should be specified in cents
+        if ($additionalData['amount'] && $additionalData['currency']) {
+            $shipment->setTotalValueAmount($additionalData['amount']);
+            $shipment->setTotalValueCurrency($additionalData['currency']);
+        }
         try {
             $createdShipment = $this->api->createShipment($shipment);
         } catch (InvalidResourceException $exception) {
