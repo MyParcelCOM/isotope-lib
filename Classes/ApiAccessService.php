@@ -100,12 +100,14 @@ class ApiAccessService
      * Connects with the api and creates the shipment resource with the required fields.
      * @param $weight
      * @param $authID
+     * @param $orderID
      * @param $recipientAddress
      * @param $additionalData
      */
     public function createShipment(
         $weight,
         int $authID,
+        int $orderID,
         array $recipientAddress,
         $additionalData = []
     ) {
@@ -137,7 +139,8 @@ class ApiAccessService
             'status' => $status,
             'shipmentID' => $shipmentID,
             'weight' => $weight,
-            'authID' => $authID
+            'authID' => $authID,
+            'orderID' => $orderID
         ];
         $result = Database::getInstance()->prepare(
             "INSERT INTO tl_myparcelcom_api_shipment %s"

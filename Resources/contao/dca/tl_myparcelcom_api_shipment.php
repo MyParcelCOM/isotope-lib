@@ -130,6 +130,10 @@ $GLOBALS['TL_DCA'][$strName] = array
             'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
             'sql'               => "int(11) NOT NULL default 0"
         ],
+        
+        'orderID' => [
+            'sql'               => "int(11) NOT NULL default 0"
+        ]
     )
 );
 
