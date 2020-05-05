@@ -133,6 +133,7 @@ class ApiAccessService
         }
         // store shipment to database
         $status = $createdShipment->getShipmentStatus()->getStatus()->getLevel();
+        
         $shipmentID = $createdShipment->getId();
         $weight = $createdShipment->getPhysicalProperties()->getWeight();
         $insertData = [
@@ -200,7 +201,7 @@ class ApiAccessService
     private function convertAddress(array $addressData) : AddressInterface
     {
         $address = new Address();
-        $address->setStreet1($addressData['street']);
+        $address->setStreet1($addressData['street'] .  " " . $addressData['streetnumber']);
         $address->setCity($addressData['city']);
         $address->setCountryCode(strtoupper($addressData['country']));
         $address->setFirstName($addressData['firstname']);
