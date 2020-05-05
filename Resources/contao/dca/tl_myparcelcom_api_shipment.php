@@ -50,7 +50,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         
         'label' => array
         (
-            'fields'            => array('shipmentID'),
+            'fields'            => array('shipmentID', 'status', 'orderID'),
             'showColumns'       => true,
         ),
         
@@ -132,7 +132,8 @@ $GLOBALS['TL_DCA'][$strName] = array
         ],
         
         'orderID' => [
-            'sql'               => "int(11) NOT NULL default 0"
+            'label'             => "OrderID",
+            'sql'               => ['type' => 'integer', 'notnull' => false, 'default' => 0, 'unique' => true]
         ]
     )
 );

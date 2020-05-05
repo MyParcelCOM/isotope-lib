@@ -21,8 +21,8 @@ array_insert($GLOBALS['BE_MOD'], array_search('content', array_keys($GLOBALS['BE
  */
 $GLOBALS['myparcelcom']['availableShops'] = [];
 
-$GLOBALS['BE_MOD']['myparcelcom']['myparcelcom_api_shipment']['registerShipment'] = [ShipmentCallback::class, 'registerShipment'];
-$GLOBALS['BE_MOD']['myparcelcom']['myparcelcom_api_shipment']['downloadLabel'] = [ShipmentCallback::class, 'downloadLabel'];
+//$GLOBALS['BE_MOD']['myparcelcom']['myparcelcom_api_shipment']['registerShipment'] = [ShipmentCallback::class, 'registerShipment'];
+//$GLOBALS['BE_MOD']['myparcelcom']['myparcelcom_api_shipment']['downloadLabel'] = [ShipmentCallback::class, 'downloadLabel'];
 
 $GLOBALS['TL_MODELS']['tl_myparcelcom_api_auth'] = MyParcelComAuthModel::class;
 $GLOBALS['TL_MODELS']['tl_myparcelcom_api_shipment'] = MyParcelComShipmentModel::class;
