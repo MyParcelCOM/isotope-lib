@@ -125,6 +125,11 @@ class ApiAccessService
             $shipment->setTotalValueAmount($additionalData['amount']);
             $shipment->setTotalValueCurrency($additionalData['currency']);
         }
+        if ($additionalData['description']) {
+            $shipment->setDescription($additionalData['description']);
+        }
+        
+        
         try {
             $createdShipment = $this->api->createShipment($shipment);
         } catch (InvalidResourceException $exception) {
@@ -201,13 +206,16 @@ class ApiAccessService
     private function convertAddress(array $addressData) : AddressInterface
     {
         $address = new Address();
-        $address->setStreet1($addressData['street'] .  " " . $addressData['streetnumber']);
+        $address->setStreet1($addressData['street']);
         $address->setCity($addressData['city']);
         $address->setCountryCode(strtoupper($addressData['country']));
         $address->setFirstName($addressData['firstname']);
         $address->setLastName($addressData['lastname']);
         $address->setStreetNumber($addressData['streetnumber']);
         $address->setPostalCode($addressData['postalCode']);
+        // set default "-" as company since it is mandatory
+        $address->setCompany($addressData['company'] ?: "-");
+        $address->setPhoneNumber($addressData['phoneNumber']);
         return $address;
     }
 }

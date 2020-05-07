@@ -185,6 +185,16 @@ $GLOBALS['TL_DCA'][$strName] = array
             'exclude'           => true,
             'sql'               => "int(10) NOT NULL default 0"
         ),
+    
+        'trackingStatus' => array
+        (
+            'label'             => $GLOBALS['TL_LANG'][$strName]['trackingStatus'],
+            'inputType'         => 'select',
+            'options_callback'  => [AuthCallback::class, 'getAvailableOrderStatus'],
+            'eval'              => array('mandatory' => false, 'tl_class' => 'long', 'includeBlankOption' => true),
+            'exclude'           => true,
+            'sql'               => "int(10) NOT NULL default 0"
+        ),
     )
 );
 
