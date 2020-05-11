@@ -128,7 +128,11 @@ class ApiAccessService
         if ($additionalData['description']) {
             $shipment->setDescription($additionalData['description']);
         }
-        
+        if ($additionalData['dimensions']) {
+            $shipment->getPhysicalProperties()->setHeight($additionalData['dimensions']['height']);
+            $shipment->getPhysicalProperties()->setWidth($additionalData['dimensions']['width']);
+            $shipment->getPhysicalProperties()->setLength($additionalData['dimensions']['length']);
+        }
         
         try {
             $createdShipment = $this->api->createShipment($shipment);
