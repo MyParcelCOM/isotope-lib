@@ -43,9 +43,9 @@ $GLOBALS['TL_DCA'][$strName] = array
         'sorting' => array
         (
             'mode'              => 2,
-            'fields'            => array('shipmentID ASC'),
+            'fields'            => array('orderID DESC'),
             'panelLayout'       => 'filter;sort,search,limit',
-            'headerFields'      => array('shipmentID'),
+            'headerFields'      => array('orderID'),
         ),
         
         'label' => array
@@ -115,6 +115,7 @@ $GLOBALS['TL_DCA'][$strName] = array
             'label'             => $GLOBALS['TL_LANG'][$strName]['status'],
             'inputType'         => 'text',
             'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
+            'reference'         => $GLOBALS['TL_LANG'][$strName]['statusrefs'],
             'sql'               => "varchar(255) NOT NULL default ''"
         ],
         

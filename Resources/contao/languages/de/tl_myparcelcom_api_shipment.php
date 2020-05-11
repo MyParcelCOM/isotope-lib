@@ -16,4 +16,6 @@ $GLOBALS['TL_LANG'][$strName]['show'] = ['Lieferung ID %s anzeigen', 'Die Liefer
 $GLOBALS['TL_LANG'][$strName]['registerShipment'] = ['Lieferung ID %s registrieren', 'Die Lieferung mit der ID %s zum Versand registieren'];
 $GLOBALS['TL_LANG'][$strName]['downloadLabel'] = ['Label der Lieferung ID %s herunterladen', 'Das Label der Lieferung ID %s herunterladen'];
 
-
+$GLOBALS['TL_LANG'][$strName]['statusrefs']['pending'] = "Noch nicht übertragen";
+$GLOBALS['TL_LANG'][$strName]['statusrefs']['transferred'] = "Ins MyParcel-Portal übertragen";
+$GLOBALS['TL_LANG'][$strName]['statusrefs']['trackable'] = "Tracking-Informationen stehen bereit";

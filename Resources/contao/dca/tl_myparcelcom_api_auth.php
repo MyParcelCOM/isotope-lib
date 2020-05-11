@@ -96,7 +96,7 @@ $GLOBALS['TL_DCA'][$strName] = array
     //Palettes
     'palettes' => array
     (
-        'default'   =>  '{data_legend},name,clientid,clientsecret,apiUrl,authUrl,shopName,connectWith,myparcelStatus;',
+        'default'   =>  '{data_legend},name,clientid,clientsecret,apiUrl,authUrl,shopName,connectWith,myparcelStatus,trackingStatus;',
     ),
     
     
