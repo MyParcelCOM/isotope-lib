@@ -35,7 +35,6 @@ class ShipmentStatusSync
                 if ($statusLevel === "success") {
                 
                 }
-                // TODO ist dieser statusCode auch gesetzt wenn die registrierung fehlschlägt?
                 if ($statusCode === "shipment-registered") {
                     $success = $this->updateShipmentStatus($shipmentId, $authModel);
                     if ($success) {
