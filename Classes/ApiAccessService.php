@@ -210,12 +210,12 @@ class ApiAccessService
     private function convertAddress(array $addressData) : AddressInterface
     {
         $address = new Address();
-        $address->setStreet1($addressData['street']);
+        $address->setStreet1($addressData['street'] . " " . $addressData['streetnumber']);
         $address->setCity($addressData['city']);
         $address->setCountryCode(strtoupper($addressData['country']));
         $address->setFirstName($addressData['firstname']);
         $address->setLastName($addressData['lastname']);
-        $address->setStreetNumber($addressData['streetnumber']);
+//        $address->setStreetNumber($addressData['streetnumber']);
         $address->setPostalCode($addressData['postalCode']);
         // set default "-" as company since it is mandatory
         $address->setCompany($addressData['company'] ?: "-");
