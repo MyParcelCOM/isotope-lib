@@ -5,6 +5,8 @@ namespace MyParcelCom\ContaoApi\Classes;
 
 
 use Contao\Database;
+use Contao\Message;
+use MyParcelCom\ApiSdk\Http\Exceptions\RequestException;
 use MyParcelCom\ContaoApi\Resources\contao\models\MyParcelComAuthModel;
 use MyParcelCom\ContaoApi\Resources\contao\models\MyParcelComShipmentModel;
 
@@ -28,7 +30,16 @@ class ShipmentStatusSync
             $shipment = MyParcelComShipmentModel::findBy('orderID', $orderID);
             if ($shipment) {
                 $shipmentId = $shipment->shipmentID;
-                $objShipment = $apiService->getShipment($shipmentId);
+                try {
+                    $objShipment = $apiService->getShipment($shipmentId);
+                } catch (RequestException $e) {
+                    if ($e->getResponse()->getStatusCode() === 404) {
+                        $sql = "UPDATE tl_myparcelcom_api_shipment SET status = ? WHERE shipmentID = ?";
+                        Database::getInstance()->prepare($sql)->execute(ShipmentStatus::STATUS_DELETED, $shipmentId);
+                        Message::addError("Die Sendung mit der ID $orderID wurde im MyParcel-Portal gelöscht.");
+                    }
+                    continue;
+                }
                 $status = $objShipment->getShipmentStatus()->getStatus();
                 $statusLevel = $status->getLevel();
                 $statusCode = $status->getCode();

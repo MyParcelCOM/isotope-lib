@@ -19,3 +19,4 @@ $GLOBALS['TL_LANG'][$strName]['downloadLabel'] = ['Label der Lieferung ID %s her
 $GLOBALS['TL_LANG'][$strName]['statusrefs']['pending'] = "Noch nicht übertragen";
 $GLOBALS['TL_LANG'][$strName]['statusrefs']['transferred'] = "Ins MyParcel-Portal übertragen";
 $GLOBALS['TL_LANG'][$strName]['statusrefs']['trackable'] = "Tracking-Informationen stehen bereit";
+$GLOBALS['TL_LANG'][$strName]['statusrefs']['deleted'] = "Sendung im MyParcel-Portal gelöscht";
