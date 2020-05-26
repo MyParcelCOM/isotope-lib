@@ -96,7 +96,7 @@ $GLOBALS['TL_DCA'][$strName] = array
     //Palettes
     'palettes' => array
     (
-        'default'   =>  '{data_legend},name,clientid,clientsecret,apiUrl,authUrl,shopName,connectWith,myparcelStatus,trackingStatus;',
+        'default'   =>  '{data_legend},name,clientid,clientsecret,apiUrl,authUrl,shopName,connectWith,myparcelStatus,trackingStatus,content_type,non_delivery,incoterm;',
     ),
     
     
@@ -195,6 +195,36 @@ $GLOBALS['TL_DCA'][$strName] = array
             'exclude'           => true,
             'sql'               => "int(10) NOT NULL default 0"
         ),
+        
+        'content_type' => [
+            'label'             => $GLOBALS['TL_LANG'][$strName]['content_type'],
+            'inputType'         => 'select',
+            'options'           => ['gifts', 'documents', 'merchandise', 'sample_merchandise', 'returned_merchandise'],
+            'default'           => 'gifts',
+            'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
+            'exclude'           => true,
+            'sql'               => "varchar(50) NOT NULL default ''"
+        ],
+    
+        'non_delivery' => [
+            'label'             => $GLOBALS['TL_LANG'][$strName]['non_delivery'],
+            'inputType'         => 'select',
+            'options'           => ['return', 'abandon'],
+            'default'           => 'gifts',
+            'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
+            'exclude'           => true,
+            'sql'               => "varchar(50) NOT NULL default ''"
+        ],
+    
+        'incoterm' => [
+            'label'             => $GLOBALS['TL_LANG'][$strName]['incoterm'],
+            'inputType'         => 'select',
+            'options'           => ['DDP', 'DAP'],
+            'default'           => 'gifts',
+            'eval'              => array('mandatory' => true, 'tl_class' => 'long'),
+            'exclude'           => true,
+            'sql'               => "varchar(50) NOT NULL default ''"
+        ],
     )
 );
 

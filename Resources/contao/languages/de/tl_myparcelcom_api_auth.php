@@ -11,6 +11,9 @@ $GLOBALS['TL_LANG'][$strName]['shopName'] = ['Name des Shops', 'Geben Sie den Na
 $GLOBALS['TL_LANG'][$strName]['connectWith'] = ['Verknüpftes Shop-System', 'Wählen Sie ein Shop-System aus, welches Sie mit MyParcel.com verknüpfen wollen.'];
 $GLOBALS['TL_LANG'][$strName]['myparcelStatus'] = ['MyParcel-Bestellstatus', 'Wählen Sie den Bestellstatus aus, welcher nach der Übertragung der Daten ans MyParcel-Portal für die Bestellung angezeigt werden soll.'];
 $GLOBALS['TL_LANG'][$strName]['trackingStatus'] = ['Status für Tracking', 'Wählen Sie den Bestellstatus aus, welcher gesetzt sein soll, sobald für eine Bestellung Tracking-Informationen zur Verfügung stehen.'];
+$GLOBALS['TL_LANG'][$strName]['content_type'] = ['Art des Sendungsinhalts', 'Wählen Sie die Art des Inhalts aus. Standardeinstellung empfohlen.'];
+$GLOBALS['TL_LANG'][$strName]['non_delivery'] = ['Nicht-Zustellung', 'Wählen Sie aus, was passieren soll, wenn die Sendung nicht zugestellt werden kann. Standardeinstellung empfohlen.'];
+$GLOBALS['TL_LANG'][$strName]['incoterm'] = ['Incoterm', 'Wählen Sie aus, ob der Sender oder der Empfänger die Zollgebühren übernehmen soll. Standardeinstellung empfohlen.'];
 
 $GLOBALS['TL_LANG'][$strName]['data_legend'] = "Daten zur Authentifizierung";
 

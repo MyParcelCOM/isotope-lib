@@ -8,10 +8,12 @@ use MyParcelCom\ApiSdk\Authentication\ClientCredentials;
 use MyParcelCom\ApiSdk\Exceptions\InvalidResourceException;
 use MyParcelCom\ApiSdk\MyParcelComApi;
 use MyParcelCom\ApiSdk\Resources\Address;
+use MyParcelCom\ApiSdk\Resources\Customs;
 use MyParcelCom\ApiSdk\Resources\Interfaces\AddressInterface;
 use MyParcelCom\ApiSdk\Resources\Interfaces\FileInterface;
 use MyParcelCom\ApiSdk\Resources\PhysicalProperties;
 use MyParcelCom\ApiSdk\Resources\Shipment;
+use MyParcelCom\ApiSdk\Resources\ShipmentItem;
 use MyParcelCom\ApiSdk\Resources\Shop;
 use Psr\Log\LoggerInterface;
 
@@ -119,12 +121,15 @@ class ApiAccessService
         $shipment->setRecipientAddress($this->convertAddress($recipientAddress));
         $shop = $this->getCurrentShop();
         $shipment->setShop($shop);
+        $shipment->setSenderAddress($shop->getSenderAddress());
+        $shipment->setReturnAddress($shop->getReturnAddress());
         // set optional, additional data
         // value amount should be specified in cents
-        if ($additionalData['amount'] && $additionalData['currency']) {
-            $shipment->setTotalValueAmount($additionalData['amount']);
-            $shipment->setTotalValueCurrency($additionalData['currency']);
-        }
+        $shipment->setRegisterAt(0);
+//        if ($additionalData['amount'] && $additionalData['currency']) {
+//            $shipment->setTotalValueAmount((int) $additionalData['amount']);
+//            $shipment->setTotalValueCurrency($additionalData['currency']);
+//        }
         if ($additionalData['description']) {
             $shipment->setDescription($additionalData['description']);
         }
@@ -132,6 +137,29 @@ class ApiAccessService
             $shipment->getPhysicalProperties()->setHeight($additionalData['dimensions']['height']);
             $shipment->getPhysicalProperties()->setWidth($additionalData['dimensions']['width']);
             $shipment->getPhysicalProperties()->setLength($additionalData['dimensions']['length']);
+        }
+
+        if ($this->isInternationalShipment($shipment)) {
+            $items = $additionalData['items'];
+            $objCustoms = new Customs();
+            $objCustoms->setContentType($additionalData['content_type']);
+            $objCustoms->setNonDelivery($additionalData['non_delivery']);
+            $objCustoms->setIncoterm($additionalData['incoterm']);
+            $objCustoms->setInvoiceNumber($additionalData['invoice_number'] ?: "1");
+            $shipment->setCustoms($objCustoms);
+            $arrItems = [];
+            foreach ($items as $item) {
+                $objItem = new ShipmentItem();
+                $objItem->setDescription($item['description']);
+                $objItem->setHsCode($item['hs_code']);
+                $objItem->setItemValue($item['item_value']);
+                $objItem->setQuantity($item['quantity']);
+                $objItem->setOriginCountryCode($item['origin_country_code']);
+                $objItem->setCurrency($additionalData['currency']);
+                $objItem->setSku($item['sku']);
+                $arrItems[] = $objItem;
+            }
+            $shipment->setItems($arrItems);
         }
         
         try {
@@ -160,6 +188,17 @@ class ApiAccessService
         } else {
             return false;
         }
+    }
+    
+    /**
+     * Returns true if the sender country and the recipient country are different.
+     * @param Shipment $shipment
+     * @return bool
+     */
+    private function isInternationalShipment(Shipment $shipment)
+    {
+        $senderAddress = $shipment->getShop()->getSenderAddress();
+        return $senderAddress->getCountryCode() !== $shipment->getRecipientAddress()->getCountryCode();
     }
     
     /**
