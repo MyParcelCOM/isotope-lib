@@ -43,10 +43,10 @@ class ApiAccessService
      */
     private $api = null;
     
-    /**
-     * @var LoggerInterface
-     */
-    private $logger = null;
+//    /**
+//     * @var LoggerInterface
+//     */
+//    private $logger = null;
     
     /**
      * ApiAccessService constructor.
@@ -62,7 +62,7 @@ class ApiAccessService
         $this->authUrl = $authUrl;
         $this->api = new MyParcelComApi($url);
         $this->shopName = $shopName;
-        $this->logger = System::getContainer()->get('logger');
+//        $this->logger = System::getContainer()->get('logger');
     }
     
     /**
@@ -165,7 +165,7 @@ class ApiAccessService
         try {
             $createdShipment = $this->api->createShipment($shipment);
         } catch (InvalidResourceException $exception) {
-            $this->logger->error($exception->getMessage());
+//            $this->logger->error($exception->getMessage());
             return false;
         }
         // store shipment to database
@@ -214,7 +214,7 @@ class ApiAccessService
         try {
             $this->api->updateShipment($shipment);
         } catch (InvalidResourceException $exception) {
-            $this->logger->error($exception->getMessage());
+//            $this->logger->error($exception->getMessage());
             return false;
         }
         return true;
@@ -258,7 +258,7 @@ class ApiAccessService
         $address->setPostalCode($addressData['postalCode']);
         // set default "-" as company since it is mandatory
         $address->setCompany($addressData['company'] ?: "-");
-        $address->setPhoneNumber($addressData['phoneNumber']);
+        $address->setPhoneNumber($addressData['phoneNumber'] ?: "+4915712345678");
         return $address;
     }
 }
