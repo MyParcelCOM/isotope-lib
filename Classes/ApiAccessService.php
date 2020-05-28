@@ -126,10 +126,10 @@ class ApiAccessService
         // set optional, additional data
         // value amount should be specified in cents
         $shipment->setRegisterAt(0);
-//        if ($additionalData['amount'] && $additionalData['currency']) {
-//            $shipment->setTotalValueAmount((int) $additionalData['amount']);
-//            $shipment->setTotalValueCurrency($additionalData['currency']);
-//        }
+        if ($additionalData['amount'] && $additionalData['currency']) {
+            $shipment->setTotalValueAmount((int) $additionalData['amount']);
+            $shipment->setTotalValueCurrency($additionalData['currency']);
+        }
         if ($additionalData['description']) {
             $shipment->setDescription($additionalData['description']);
         }
@@ -138,8 +138,17 @@ class ApiAccessService
             $shipment->getPhysicalProperties()->setWidth($additionalData['dimensions']['width']);
             $shipment->getPhysicalProperties()->setLength($additionalData['dimensions']['length']);
         }
+        $international = false;
+//        $availableServices = $this->api->getServices();
+//        foreach ($availableServices as $service) {
+//            if ($service->getName() === "Classic") {
+//                $shipment->setService($service);
+//                break;
+//            }
+//        }
 
         if ($this->isInternationalShipment($shipment)) {
+            $international = true;
             $items = $additionalData['items'];
             $objCustoms = new Customs();
             $objCustoms->setContentType($additionalData['content_type']);
@@ -184,7 +193,7 @@ class ApiAccessService
             "INSERT INTO tl_myparcelcom_api_shipment %s"
         )->set($insertData)->execute();
         if ($result->insertId) {
-            return true;
+            return ['success' => true, 'international' => $international];
         } else {
             return false;
         }
