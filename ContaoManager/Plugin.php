@@ -41,7 +41,7 @@ class Plugin implements BundlePluginInterface, ConfigPluginInterface
 
     public function registerContainerConfiguration(LoaderInterface $loader, array $managerConfig)
     {
-        $loader->load('@MyParcelComContaoApiBundle/Resources/config/config.yml');
+        $loader->load('@MyParcelComContaoLibBundle/Resources/config/config.yml');
     }
 
 }
