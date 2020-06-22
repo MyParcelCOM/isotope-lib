@@ -1,4 +1,23 @@
 # MyParcelCom - Isotope
+
+
+Some informations/instructions for setup of bundle
+
+Please make sure you have first installed the bundle MyParcelCOM/contao-lib and created a account at https://app.myparcel.com/registration for getting API-credentials.
+With this bundle you get the status fields from MyParcelCOM/contao-lib bundle. You get the entry "Isotope" as field for connected shop system. For the right working
+you need a valid API configuration.
+
+## Isotope-orderoverview
+This bundle didn't have own Backend-modules. It expand only the existing order grid with own functionallities.
+There are two new functions which added.
+1. MyParcel.com - Button exports order data and change order status
+2. Tracking - Button open a new window with tracking code and link for getting detail trackinginfos from carrier.
+Finally the order grid shows two new buttons, too. "Status für alle aktualisieren"-Button checks the transferstatus of all existing orders. The second button "transfer all" orders to MyParcel.com poratl)  could be activated with setting at the config area of contao (menu called "MyParcel.com"). This button transfers all existing order data for all orders with one click. This function is most needed if you have old orders which are not transfered to the MyParcel.com - Portal.
+
+Detailinformations for installation and setup could be found at https://help.myparcel.com/support/solutions ,too.
+
+
+(German part)
 Im Folgenden werden ein paar Hinweise für die Einrichtung des Bundles gegeben.
 
 Durch dieses Bundle werden in den Statusfeldern des MyParcelCom/ContaoLib-Bundles 
