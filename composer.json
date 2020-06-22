@@ -1,7 +1,7 @@
 {
-    "name": "myparcelcom/contao-lib",
+    "name": "myparcelcom/isotope-lib",
     "type": "contao-bundle",
-    "description": "Provides a basic interface for Contao communicating with the MyParcel.com-API",
+    "description": "Provides an integration for Isotope eCommerce for Contao.",
     "keywords": ["myparcelcom"],
     "homepage": "https://www.myparcel.com/",
     "license": "LGPL-3.0-or-later",
@@ -15,7 +15,8 @@
     "require": {
         "php": "^7.1",
         "contao/core-bundle": "^4.4",
-        "myparcelcom/api-sdk": "^2.2"
+        "myparcelcom/api-sdk": "^2.2",
+        "myparcelcom/contao-lib": "*"
     },
     "conflict": {
         "contao/core": "*",
@@ -23,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "MyParcelCom\\ContaoLib\\": ""
+            "MyParcelCom\\IsotopeLib\\": ""
         },
         "classmap": [
             "Resources/contao/"
@@ -42,7 +43,7 @@
         "branch-alias": {
             "dev-master": "1.0.x-dev"
         },
-        "contao-manager-plugin": "MyParcelCom\\ContaoLib\\ContaoManager\\Plugin"
+        "contao-manager-plugin": "MyParcelCom\\IsotopeLib\\ContaoManager\\Plugin"
     }
 }
 

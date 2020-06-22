@@ -1,0 +1,29 @@
+<style>
+    .tracking-data > div {
+        margin: 20px;
+    }
+
+    .tracking-data > h2 {
+        margin-left: 20px;
+    }
+    .tracking-data a {
+        text-decoration: underline;
+    }
+</style>
+<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+    <div id="tl_buttons">
+        <a href="/contao?do=iso_orders<?php echo '&rt=' . \Contao\Input::get('rt') . '&ref=' . \Contao\Input::get('ref') ?>" class="header_back" title="" accesskey="b" onclick="Backend.getScrollOffset()">Zurück</a>
+    </div>
+    <div class="tracking-data">
+        <h2>
+            Tracking-Informationen zur Bestellung <?php echo $this->orderID ?>
+        </h2>
+        <div>
+            <span>Tracking-Code: </span>
+            <span><?php echo $this->trackingCode ?></span>
+        </div>
+        <div>
+            <a href="<?php echo $this->trackingUrl ?>">Sendung verfolgen</a>
+        </div>
+    </div>
+</div>

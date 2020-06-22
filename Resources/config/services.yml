@@ -1,0 +1,6 @@
+services:
+    ## register listener for status options
+    myparcelcom.isotope.onLoadStatusOptionsGetIsotopeStatus:
+        class: MyParcelCom\IsotopeLib\Classes\Listener\LoadStatusOptionsListener
+        tags:
+            - { name: kernel.event_listener, event: myparcelcom.load.status, method: onLoadStatusOptionsGetIsotopeStatus, priority: 6000 }

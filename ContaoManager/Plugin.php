@@ -11,7 +11,7 @@
  * @link      https://www.kuestenschmiede.de
  */
 
-namespace MyParcelCom\ContaoLib\ContaoManager;
+namespace MyParcelCom\IsotopeLib\ContaoManager;
 
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
@@ -20,6 +20,7 @@ use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Config\ConfigPluginInterface;
 use MyParcelCom\ContaoLib\MyParcelComContaoLibBundle;
+use MyParcelCom\IsotopeLib\MyParcelComIsotopeLibBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
 class Plugin implements BundlePluginInterface, ConfigPluginInterface
@@ -34,14 +35,14 @@ class Plugin implements BundlePluginInterface, ConfigPluginInterface
     public function getBundles(ParserInterface $parser)
     {
         return [
-            BundleConfig::create(MyParcelComContaoLibBundle::class)
-                ->setLoadAfter([ContaoCoreBundle::class])
+            BundleConfig::create(MyParcelComIsotopeLibBundle::class)
+                ->setLoadAfter([ContaoCoreBundle::class, MyParcelComContaoLibBundle::class, 'isotope'])
         ];
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader, array $managerConfig)
     {
-        $loader->load('@MyParcelComContaoLibBundle/Resources/config/config.yml');
+        $loader->load('@MyParcelComIsotopeLibBundle/Resources/config/config.yml');
     }
 
 }
