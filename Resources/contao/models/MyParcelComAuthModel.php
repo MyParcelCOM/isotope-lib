@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MyParcelCom\ContaoApi\Resources\contao\models;
+namespace MyParcelCom\ContaoLib\Resources\contao\models;
 
 
 use Contao\Model;

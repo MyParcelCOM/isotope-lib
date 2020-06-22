@@ -16,7 +16,7 @@
  * Table tl_myparcelcom_api_auth
  */
 
-use MyParcelCom\ContaoApi\Classes\Contao\AuthCallback;
+use MyParcelCom\ContaoLib\Classes\Contao\AuthCallback;
 
 $strName = 'tl_myparcelcom_api_auth';
 

@@ -4,9 +4,9 @@
  * Backend Modules
  */
 
-use MyParcelCom\ContaoApi\Classes\Contao\ShipmentCallback;
-use MyParcelCom\ContaoApi\Resources\contao\models\MyParcelComAuthModel;
-use MyParcelCom\ContaoApi\Resources\contao\models\MyParcelComShipmentModel;
+use MyParcelCom\ContaoLib\Classes\Contao\ShipmentCallback;
+use MyParcelCom\ContaoLib\Resources\contao\models\MyParcelComAuthModel;
+use MyParcelCom\ContaoLib\Resources\contao\models\MyParcelComShipmentModel;
 
 array_insert($GLOBALS['BE_MOD'], array_search('content', array_keys($GLOBALS['BE_MOD'])) + 1, array
 (

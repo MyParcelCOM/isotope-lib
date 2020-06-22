@@ -1,14 +1,14 @@
 <?php
 
 
-namespace MyParcelCom\ContaoApi\Classes;
+namespace MyParcelCom\ContaoLib\Classes;
 
 
 use Contao\Database;
 use Contao\Message;
 use MyParcelCom\ApiSdk\Http\Exceptions\RequestException;
-use MyParcelCom\ContaoApi\Resources\contao\models\MyParcelComAuthModel;
-use MyParcelCom\ContaoApi\Resources\contao\models\MyParcelComShipmentModel;
+use MyParcelCom\ContaoLib\Resources\contao\models\MyParcelComAuthModel;
+use MyParcelCom\ContaoLib\Resources\contao\models\MyParcelComShipmentModel;
 
 class ShipmentStatusSync
 {

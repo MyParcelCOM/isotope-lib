@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MyParcelCom\ContaoApi\Classes;
+namespace MyParcelCom\ContaoLib\Classes;
 
 
 class ShipmentStatus

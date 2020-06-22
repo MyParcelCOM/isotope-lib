@@ -11,7 +11,7 @@
  * @link      https://www.kuestenschmiede.de
  */
 
-namespace MyParcelCom\ContaoApi\ContaoManager;
+namespace MyParcelCom\ContaoLib\ContaoManager;
 
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
@@ -19,7 +19,7 @@ use Contao\ManagerPlugin\Bundle\Config\ConfigInterface;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Config\ConfigPluginInterface;
-use MyParcelCom\ContaoApi\MyParcelComContaoApiBundle;
+use MyParcelCom\ContaoLib\MyParcelComContaoLibBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
 class Plugin implements BundlePluginInterface, ConfigPluginInterface
@@ -34,7 +34,7 @@ class Plugin implements BundlePluginInterface, ConfigPluginInterface
     public function getBundles(ParserInterface $parser)
     {
         return [
-            BundleConfig::create(MyParcelComContaoApiBundle::class)
+            BundleConfig::create(MyParcelComContaoLibBundle::class)
                 ->setLoadAfter([ContaoCoreBundle::class])
         ];
     }

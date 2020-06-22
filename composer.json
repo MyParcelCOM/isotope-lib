@@ -1,5 +1,5 @@
 {
-    "name": "myparcelcom/contao-api",
+    "name": "myparcelcom/contao-lib",
     "type": "contao-bundle",
     "description": "Provides a basic interface for Contao communicating with the MyParcel.com-API",
     "keywords": ["myparcelcom"],
@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "MyParcelCom\\ContaoApi\\": ""
+            "MyParcelCom\\ContaoLib\\": ""
         },
         "classmap": [
             "Resources/contao/"
@@ -42,7 +42,7 @@
         "branch-alias": {
             "dev-master": "1.0.x-dev"
         },
-        "contao-manager-plugin": "MyParcelCom\\ContaoApi\\ContaoManager\\Plugin"
+        "contao-manager-plugin": "MyParcelCom\\ContaoLib\\ContaoManager\\Plugin"
     }
 }
 

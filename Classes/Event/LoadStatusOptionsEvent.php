@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MyParcelCom\ContaoApi\Classes\Event;
+namespace MyParcelCom\ContaoLib\Classes\Event;
 
 
 use Symfony\Component\EventDispatcher\Event;

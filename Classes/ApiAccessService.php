@@ -1,6 +1,6 @@
 <?php
 
-namespace MyParcelCom\ContaoApi\Classes;
+namespace MyParcelCom\ContaoLib\Classes;
 
 use Contao\Database;
 use Contao\System;

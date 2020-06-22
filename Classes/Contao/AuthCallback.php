@@ -1,13 +1,13 @@
 <?php
 
 
-namespace MyParcelCom\ContaoApi\Classes\Contao;
+namespace MyParcelCom\ContaoLib\Classes\Contao;
 
 
 use Contao\Backend;
 use Contao\Database;
 use Contao\System;
-use MyParcelCom\ContaoApi\Classes\Event\LoadStatusOptionsEvent;
+use MyParcelCom\ContaoLib\Classes\Event\LoadStatusOptionsEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class AuthCallback extends Backend
