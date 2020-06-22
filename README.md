@@ -1,4 +1,4 @@
-# MyParcelIsotope
+# MyParcelCom - Isotope
 Im Folgenden werden ein paar Hinweise für die Einrichtung des Bundles gegeben.
 
 Durch dieses Bundle werden in den Statusfeldern des MyParcelCom/ContaoLib-Bundles 
