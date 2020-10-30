@@ -3,7 +3,7 @@
 
 Some informations/instructions for setup of bundle
 
-Please make sure you have first installed the bundle MyParcelCOM/contao-lib and created a account at https://app.myparcel.com/registration for getting API-credentials.
+Please make sure you have first installed the bundle MyParcelCOM/contao-lib and created a account at https://sbs.sendmyparcel.com/registration for getting API-credentials.
 With this bundle you get the status fields from MyParcelCOM/contao-lib bundle. You get the entry "Isotope" as field for connected shop system. For the right working
 you need a valid API configuration.
 
